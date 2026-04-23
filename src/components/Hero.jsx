@@ -41,7 +41,7 @@ export default function Hero() {
           {/* COLUMNA IZQUIERDA: TEXTO */}
           <div className="text-left">
             <span className="hero-badge inline-block px-4 py-1.5 mb-6 text-sm font-semibold tracking-wide text-blue-600 uppercase bg-blue-50 rounded-full">
-              SmartLot Cloud v2.0
+              SmartLot Prototype
             </span>
             
             <h1 className="text-6xl md:text-8xl font-extrabold text-slate-900 leading-none mb-8">
