@@ -16,23 +16,22 @@ export default function Navbar() {
   });
 
   return (
-    <header 
-      ref={navRef} 
+    <header
+      ref={navRef}
       className="fixed top-0 left-0 w-full z-50 glass-nav"
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        
+
         {/* Logo Brand Actualizado */}
         <div className="flex items-center gap-3 cursor-pointer">
-          {/* Aquí inyectamos logo.png desde la carpeta public/ */}
-          <img 
-            src="/logo.png" 
-            alt="SmartLot Logo" 
-            className="h-10 w-auto drop-shadow-sm" 
+          {/* Aumentamos h-10 a h-12 en móviles, y h-14 en escritorio */}
+          <img
+            src="/logo.png"
+            alt="SmartLot Logo"
+            className="h-12 md:h-14 w-auto drop-shadow-sm"
           />
-          <span className="text-2xl font-extrabold text-slate-900 tracking-tight">SmartLot</span>
+          <span className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">SmartLot</span>
         </div>
-
         {/* Desktop Menu */}
         <nav className="hidden md:flex gap-8 items-center font-medium text-slate-600">
           <a href="#solucion" className="hover:text-blue-600 transition-colors duration-300">Solución</a>
