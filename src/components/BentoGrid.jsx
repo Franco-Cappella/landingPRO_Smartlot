@@ -2,17 +2,16 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { LayoutGrid, Cpu, Users, Smartphone, ShieldCheck, Zap } from 'lucide-react';
+import { LayoutGrid, Cpu, Users, Smartphone, ShieldCheck } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Unificamos el estilo: fondos blancos, textos oscuros y colores sutiles en los íconos
 const features = [
   { 
     title: "IA de Asignación", 
     icon: <Cpu className="w-6 h-6" />, 
     desc: "Optimización dinámica que aprende de los flujos de tu empresa para maximizar la ocupación.", 
-    size: "md:col-span-2 md:row-span-2", // Tarjeta grande
+    size: "md:col-span-2 md:row-span-2",
     iconBg: "bg-blue-50 text-blue-600",
     badge: "Core"
   },
@@ -20,7 +19,7 @@ const features = [
     title: "Dashboard Analítico", 
     icon: <LayoutGrid className="w-6 h-6" />, 
     desc: "Métricas en tiempo real, reportes de uso y gestión de usuarios en un solo lugar.", 
-    size: "md:col-span-2 md:row-span-1", // Tarjeta ancha
+    size: "md:col-span-2 md:row-span-1",
     iconBg: "bg-indigo-50 text-indigo-600",
     badge: "Admin"
   },
@@ -28,7 +27,7 @@ const features = [
     title: "Acceso QR", 
     icon: <Smartphone className="w-6 h-6" />, 
     desc: "Entrada ágil y sin contacto desde el celular.", 
-    size: "md:col-span-1 md:row-span-1", // Tarjeta chica
+    size: "md:col-span-1 md:row-span-1",
     iconBg: "bg-emerald-50 text-emerald-600",
     badge: null
   },
@@ -36,7 +35,7 @@ const features = [
     title: "Seguridad", 
     icon: <ShieldCheck className="w-6 h-6" />, 
     desc: "Control estricto de patentes y permisos.", 
-    size: "md:col-span-1 md:row-span-1", // Tarjeta chica
+    size: "md:col-span-1 md:row-span-1",
     iconBg: "bg-slate-100 text-slate-700",
     badge: null
   }
@@ -46,22 +45,31 @@ export default function BentoGrid() {
   const main = useRef();
 
   useGSAP(() => {
-    gsap.from(".bento-card", {
-      scrollTrigger: {
-        trigger: main.current,
-        start: "top 75%",
+    // Usamos fromTo para evitar que el Strict Mode de React deje las tarjetas invisibles
+    gsap.fromTo(".bento-card", 
+      { 
+        y: 60, 
+        autoAlpha: 0, 
+        scale: 0.95 
       },
-      y: 50,
-      scale: 0.95,
-      autoAlpha: 0,
-      stagger: 0.1,
-      duration: 0.8,
-      ease: "power3.out" // Volvemos a un ease más corporativo y menos "saltarín"
-    });
+      {
+        scrollTrigger: {
+          trigger: main.current,
+          start: "top 80%",
+        },
+        y: 0,
+        autoAlpha: 1,
+        scale: 1,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: "power3.out"
+      }
+    );
   }, { scope: main });
 
   return (
-    <section ref={main} className="py-24 bg-slate-50 relative">
+    /* Cambiamos bg-slate-50 por bg-white para unificar con el resto de la app */
+    <section ref={main} className="py-24 bg-white relative">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Cabecera de Sección */}
@@ -77,19 +85,17 @@ export default function BentoGrid() {
           </p>
         </div>
 
-        {/* Grilla Bento: Estética Clean y Uniforme */}
+        {/* Grilla Bento: Fondo blanco y bordes suaves */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[180px]">
           {features.map((f, i) => (
             <div 
               key={i} 
-              // Aplicamos bg-white y border-slate-100 a TODAS las tarjetas para consistencia
               className={`
                 bento-card group relative ${f.size} bg-white
-                p-8 rounded-3xl border border-slate-200 flex flex-col justify-between 
+                p-8 rounded-3xl border border-slate-100 flex flex-col justify-between 
                 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300
               `}
             >
-              {/* Contenido Superior */}
               <div className="flex justify-between items-start">
                 <div className={`w-12 h-12 ${f.iconBg} rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110`}>
                   {f.icon}
@@ -101,7 +107,6 @@ export default function BentoGrid() {
                 )}
               </div>
 
-              {/* Contenido Inferior */}
               <div className="relative z-10">
                 <h3 className="text-xl font-bold text-slate-900 mb-2 tracking-tight">
                   {f.title}
@@ -110,7 +115,6 @@ export default function BentoGrid() {
                   {f.desc}
                 </p>
               </div>
-              
             </div>
           ))}
         </div>
