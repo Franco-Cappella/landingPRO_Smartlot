@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const features = [
   { 
-    title: "IA de Asignación", 
+    title: "Tecnología de Asignación", 
     icon: <Cpu className="w-6 h-6" />, 
     desc: "Optimización dinámica que aprende de los flujos de tu empresa para maximizar la ocupación.", 
     size: "md:col-span-2 md:row-span-2",
@@ -24,7 +24,7 @@ const features = [
     badge: "Admin"
   },
   { 
-    title: "Acceso QR", 
+    title: "Acceso Móvil", 
     icon: <Smartphone className="w-6 h-6" />, 
     desc: "Entrada ágil y sin contacto desde el celular.", 
     size: "md:col-span-1 md:row-span-1",
